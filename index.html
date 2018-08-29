@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+    <title>Search me O_O</title>
+    <style>
+        body{
+        height: 100%;
+        }
+        mark {
+        background: yellow;
+        }
+
+        mark.current {
+        background: orange;
+        }
+    </style>
+</head>
+<body>
+
+<!-- START NAV -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<a class="navbar-brand" href="#">Navbar</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success my-2 my-sm-0" data-search="next">&#8595;</button>
+        <button class="btn btn-outline-success my-2 my-sm-0 " data-search="prev">&#8593;</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" data-search="clear">&#739;</button>
+    </form>
+</div>
+<!-- END NAV-->
+</nav>
+<div class="container">
+<div class="row">
+<div class="col-md-12 col-sm-6">
+    <div class="component">
+    <p>Lorem ipsum dolor amet occupy pok pok quinoa, kickstarter hexagon pabst biodiesel direct trade man bun truffaut lumbersexual yr af pickled food truck. Shoreditch biodiesel humblebrag XOXO, raw denim readymade lomo. Kombucha salvia gastropub, woke shoreditch succulents ramps lumbersexual pork belly. Actually hashtag lumbersexual slow-carb shaman knausgaard.</p>
+
+    <p>Tbh ramps kogi jianbing, offal roof party biodiesel cardigan four loko. Fashion axe +1 health goth keytar locavore. Gluten-free shabby chic man braid thundercats craft beer lyft mixtape beard artisan chicharrones. Organic vape williamsburg tote bag lomo literally cold-pressed everyday carry neutra tattooed kinfolk trust fund palo santo fashion axe +1. Raclette blue bottle paleo, mumblecore kogi echo park plaid organic letterpress selfies schlitz tilde food truck art party.</p>
+
+    <p>Readymade vape semiotics glossier cardigan roof party fam small batch hammock palo santo direct trade blog beard hashtag. Cold-pressed 90's cronut 3 wolf moon. Glossier biodiesel austin tilde banjo kinfolk ramps. Heirloom craft beer meh meditation shaman pop-up. Vinyl next level activated charcoal selfies bitters farm-to-table glossier echo park ramps gluten-free everyday carry lyft lomo meggings.</p>
+
+    <p>Lyft readymade ugh, fashion axe 90's raclette whatever narwhal 3 wolf moon. Trust fund pop-up crucifix adaptogen cray hoodie offal umami cornhole intelligentsia chambray flexitarian gentrify snackwave man braid. Small batch vape cronut, scenester ramps banjo letterpress godard 3 wolf moon intelligentsia cloud bread. Single-origin coffee semiotics chillwave direct trade tattooed migas listicle gochujang tousled vexillologist cliche man bun af put a bird on it tumeric. Hoodie retro hexagon, organic VHS lo-fi cronut you probably haven't heard of them gochujang mixtape wayfarers activated charcoal four loko.</p>
+
+    <p>Gentrify authentic helvetica, lomo freegan hell of 90's umami cardigan retro twee. Selfies polaroid food truck palo santo thundercats fingerstache, subway tile tumblr unicorn whatever single-origin coffee echo park master cleanse tumeric. Shabby chic poke put a bird on it coloring book edison bulb direct trade. Salvia fixie photo booth wolf YOLO.</p>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js"></script>
+ <script>
+
+ //catch DOM elements
+var content = document.querySelector(".component");
+var keywordInput = document.querySelector("input[type='search']");
+var prevBtn = document.querySelector("button[data-search='prev']");
+var nextBtn = document.querySelector("button[data-search='next']");
+var clearBtn =  document.querySelector("button[data-search='clear']");
+//create a new mark.js instance
+var instance = new Mark(content);
+//variable which will hold all found words
+var markedElements;
+//initialise the index of found word to 0
+var currentIndex = 0;
+
+
+/*
+** Function to jump to found word in text
+*/
+function jumpTo(x){
+  var position;
+  var positionTop;
+  var currentElement;
+  if(markedElements.length){
+     currentElement = markedElements[x];
+     var bodyRect = document.body.getBoundingClientRect();
+     position = currentElement.getBoundingClientRect();
+     positionTop = position.top - bodyRect.top - 80;
+     window.scrollTo({
+      behavior: "smooth",
+      top:positionTop
+     });
+
+
+  }
+}
+
+/*
+** add addEventListener to input
+*/
+keywordInput.addEventListener("input", function(){
+var key = this.value;
+instance.unmark({
+  done: function(){
+    instance.mark(key, {
+       separateWordSearch: false,
+       done: function(foundValues){
+          markedElements = document.querySelectorAll('mark');
+          currentIndex = 0;
+          jumpTo(currentIndex);
+       }
+    });
+  }
+});
+})
+
+/*
+** add function to next button
+*/
+nextBtn.addEventListener('click', function(event){
+    event.preventDefault();
+    if(currentIndex == markedElements.length-1){
+        currentIndex = 0;
+    }else{
+        currentIndex +=1;
+    }
+    jumpTo(currentIndex);
+})
+
+/*
+** add function to prev button
+*/
+prevBtn.addEventListener('click',function(event){
+    event.preventDefault();
+    if( currentIndex <=0 ){
+        currentIndex = markedElements.length-1;
+    }else{
+        currentIndex -= 1;
+    }
+    jumpTo(currentIndex);
+})
+
+/*
+** add function to clear button
+*/
+clearBtn.addEventListener('click',function(event){
+    event.preventDefault();
+    keywordInput.value = '';
+})
+
+ </script>
+
+</body>
+</html>
